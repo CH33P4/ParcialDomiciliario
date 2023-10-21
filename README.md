@@ -6,6 +6,7 @@
 - Tomas Zampella
 
 ## Proyecto: Contador binario.
+![Proyecto](https://cdn.discordapp.com/attachments/1158565907921109100/1165369244909850735/image.png)
 
 ## Descripción
 El proyecto consiste en una maqueta básica utilizando pocos componentes para llevar cuenta de números desde el 0 (cero) hasta el 99 (noventa y nueve) mediante la pulsación de botones: uno que incrementa el valor actual, otro que lo decrementa y un tercero cuya funcionalidad es retornar la cuenta nuevamente a cero.

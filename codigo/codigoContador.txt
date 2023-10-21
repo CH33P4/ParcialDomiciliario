@@ -1,0 +1,195 @@
+#define UNIDAD A0
+#define DECENA A1
+
+int A = 9;
+int B = 10;
+int C = 2;
+int D = 3;
+int E = 4;
+int F = 8;
+int G = 7; 
+
+int plusOne = 13;
+int minusOne = 12;
+int resetButton = 11;
+int counter = 0;
+int counter2 = 0;
+int buttonUpState = 0;
+int lastButtonUpState = 0;
+int buttonDownState = 0;
+int lastButtonDownState = 0; 
+int resetButtonState = 0;
+int lastResetButtonState = 0;
+  
+void setup() { 
+  Serial.begin(9600); 
+  pinMode(A, OUTPUT);
+  pinMode(B, OUTPUT);
+  pinMode(C, OUTPUT);
+  pinMode(D, OUTPUT);
+  pinMode(E, OUTPUT);
+  pinMode(F, OUTPUT);
+  pinMode(G, OUTPUT);
+  pinMode(UNIDAD, OUTPUT);
+  pinMode(DECENA, OUTPUT);
+} 
+  
+void loop() {
+  buttonUpState = digitalRead(plusOne); 
+  buttonDownState = digitalRead(minusOne);
+  resetButtonState = digitalRead(resetButton);
+  if (buttonUpState != lastButtonUpState) {
+    if (buttonUpState == HIGH) {
+      if(counter < 9){
+        counter++;    
+      }
+      if(counter == 9) {
+        counter = 0;
+        counter2++;
+      }
+      printOnSerial(counter, counter2);
+      delay(200); 
+   	}  
+  }
+  if (buttonDownState != lastButtonDownState) {
+    if (buttonDownState == HIGH) {
+      if(counter == 0 && counter2 == 1) {
+        counter = 9; 
+        counter2--;
+      }
+      if (counter == 0 && counter2 == 0){
+        counter = 0;
+      } 
+      counter--;
+      printOnSerial(counter, counter2);
+      delay(200); 
+    }
+  } 
+  if (resetButtonState != lastResetButtonState){
+    if (resetButtonState == HIGH){
+      counter = 0;
+      counter2 = 0;
+    }
+  }
+  showNumbers(counter, counter2);
+} 
+ 
+void changeNumber(int buttonPress) {
+  switch (buttonPress) {
+    case 0: 
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(F, LOW);
+    digitalWrite(G, HIGH);
+    break;
+    case 1: 
+    digitalWrite(A, HIGH);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+    break; 
+    case 2:
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, LOW);
+    break; 
+    case 3:
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, LOW);
+    break; 
+    case 4:
+    digitalWrite(A, HIGH);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    break; 
+    case 5: 
+    digitalWrite(A, LOW);
+    digitalWrite(B, HIGH);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    break; 
+    case 6: 
+    digitalWrite(A, LOW);
+    digitalWrite(B, HIGH);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    break; 
+    case 7:
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+    break; 
+    case 8: 
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    break; 
+    case 9: 
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    break;
+  } 
+}
+
+void showNumbers(int unidad, int decena){
+  if (decena == 0){
+    digitalWrite(UNIDAD, HIGH);
+    changeNumber(unidad);
+    delay(25);
+    digitalWrite(UNIDAD, LOW);
+  }
+  else{
+	digitalWrite(UNIDAD, HIGH);
+    changeNumber(unidad);
+    delay(25);
+    digitalWrite(UNIDAD, LOW);
+    digitalWrite(DECENA, HIGH);
+    changeNumber(decena);
+    delay(25);
+    digitalWrite(DECENA, LOW);
+  }
+}
+
+void printOnSerial(int unidad, int decena){
+  Serial.print(decena);
+  Serial.print(unidad);
+  Serial.println("");
+}

@@ -5,10 +5,8 @@
 - Matias A. Espinoza
 - Tomas Zampella
 
-## Imágenes por partes:
+## Parte 1:
 ![Parte 1](https://cdn.discordapp.com/attachments/1158565907921109100/1165369244909850735/image.png)
-![Parte 2](https://cdn.discordapp.com/attachments/1158565907921109100/1165910324478742529/image.png)
-![Parte 3](
 
 ## Descripción: Parte 1
 El proyecto consiste en una maqueta básica utilizando pocos componentes para llevar cuenta de números desde el 0 (cero) hasta el 99 (noventa y nueve) mediante la pulsación de botones: uno que incrementa el valor actual, otro que lo decrementa y un tercero cuya funcionalidad es retornar la cuenta nuevamente a cero.
@@ -57,6 +55,9 @@ void loop() {
   showNumbers(counter, counter2);
 } 
 ~~~
+
+## Parte 2:
+![Parte 2](https://cdn.discordapp.com/attachments/1158565907921109100/1165910324478742529/image.png)
 
 ## Descripción: Parte 2
 En esta parte del proyecto se reemplaza el botón de reset de la anterior parte por un interruptor deslizante, el cual determinará si se muestra el contador ya antes visto o una sucesión de números primos desde el 0 al 99. Además, se añaden un sensor de temperatura y un motor de aficionado.

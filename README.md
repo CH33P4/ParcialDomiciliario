@@ -87,8 +87,19 @@ void loop() {
 ![Parte 3](https://cdn.discordapp.com/attachments/1158565907921109100/1166046043020988477/terceraParte.png)
 
 ## Descripción: Parte 3
-Para este tramo del proyecto, se ha añadido una fotoresistencia la cual ajusta el funcionamiento de los puntos anteriores donde: ausencia de luz significa que se están ejecutando el contador o el mostrador de números primos, caso contrario se informará por el serial que se carece de la luz suficiente para iniciar las funciones.
+Para este tramo del proyecto, se ha añadido una fotoresistencia la cual ajusta el funcionamiento de los puntos anteriores donde: ausencia de luz significa que se están ejecutando el contador o el mostrador de números primos, caso contrario se informará por el serial que existe demasiada luz presente como para iniciar las funciones.
 
+~~~ C
+void loop() {
+  light = analogRead(FOTORESISTOR);
+  if (light >= 700){
+    initiateFunctions();
+  }
+  if (light < 700){
+    Serial.println("Demasiada luz presente.");
+  }
+}
+~~~
 
 ## Links al proyecto
 - [Parte 1](https://www.tinkercad.com/things/5phVSGHaVt5-shiny-gaaris/editel?sharecode=mA6AAz2ZPzN4UItgF8Y0vRSVJJgpHxs3HxNfU2h01Ms)

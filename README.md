@@ -60,7 +60,7 @@ void loop() {
 ![Parte 2](https://cdn.discordapp.com/attachments/1158565907921109100/1165910324478742529/image.png)
 
 ## Descripción: Parte 2
-En esta parte del proyecto se reemplaza el botón de reset de la anterior parte por un interruptor deslizante, el cual determinará si se muestra el contador ya antes visto o una sucesión de números primos desde el 0 al 99. Además, se añaden un sensor de temperatura y un motor de aficionado.
+En esta parte del proyecto se reemplaza el botón de reset de la anterior parte por un interruptor deslizante, el cual determinará si se muestra el contador ya antes visto o una sucesión de números primos desde el 0 al 99. Además, se añaden un sensor de temperatura y un motor de aficionado, sin embargo este último no tiene una función relevante.
 
 ## Función principal: Parte 2
 Se trasladó la lógica del contador a la función **initiateCounter()**, la cual es llamada sí y sólo si el interruptor es activado (**slideSwitch**). Caso contrario, se mostrarán los números primos llamando a la función **initiatePrimeNumbers**.
@@ -83,7 +83,14 @@ void loop() {
 }
 ~~~
 
+## Parte 3:
+![Parte 3](https://cdn.discordapp.com/attachments/1158565907921109100/1166046043020988477/terceraParte.png)
+
+## Descripción: Parte 3
+Para este tramo del proyecto, se ha añadido una fotoresistencia la cual ajusta el funcionamiento de los puntos anteriores donde: ausencia de luz significa que se están ejecutando el contador o el mostrador de números primos, caso contrario se informará por el serial que se carece de la luz suficiente para iniciar las funciones.
+
 
 ## Links al proyecto
 - [Parte 1](https://www.tinkercad.com/things/5phVSGHaVt5-shiny-gaaris/editel?sharecode=mA6AAz2ZPzN4UItgF8Y0vRSVJJgpHxs3HxNfU2h01Ms)
 - [Parte 2](https://www.tinkercad.com/things/b1jAi5JzkPg-copy-of-1-parcial-domiciliario-parte-1-/editel?sharecode=h-FHPV9EsrAtvGx3lmfAhPX5WRSrpqkEfkowLyuCKXo)
+- [Parte 3](https://www.tinkercad.com/things/35zXy1vvzqB-parcial-domiciliario-parte-3/editel?sharecode=B7BMlZAGNhJKoz0uwnNzkGsBGZukP0b2dieekMPHpz4)

@@ -56,5 +56,6 @@ void loop() {
 } 
 ~~~
 
-## Link al proyecto
-- [Proyecto en Tinkercad](https://www.tinkercad.com/things/5phVSGHaVt5-shiny-gaaris/editel?sharecode=mA6AAz2ZPzN4UItgF8Y0vRSVJJgpHxs3HxNfU2h01Ms)
+## Link del proyecto
+- [Parte 1](https://www.tinkercad.com/things/5phVSGHaVt5-shiny-gaaris/editel?sharecode=mA6AAz2ZPzN4UItgF8Y0vRSVJJgpHxs3HxNfU2h01Ms)
+- [Parte 2](https://www.tinkercad.com/things/b1jAi5JzkPg-copy-of-1-parcial-domiciliario-parte-1-/editel?sharecode=h-FHPV9EsrAtvGx3lmfAhPX5WRSrpqkEfkowLyuCKXo)

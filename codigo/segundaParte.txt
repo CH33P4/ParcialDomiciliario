@@ -1,0 +1,229 @@
+#define UNIDAD A0
+#define DECENA A1
+#define TMP A2
+#define ADELANTE 12
+#define ATRAS 13
+
+int A = 7;
+int B = 8;
+int C = 2;
+int D = 3;
+int E = 4;
+int F = 6;
+int G = 5; 
+
+float tmp = 0;
+float lastTmp = 0;
+int plusOne = 9;
+int minusOne = 10;
+int slideSwitch = 11;
+int counter = 0;
+int counter2 = 0;
+int buttonUpState = 0;
+int lastButtonUpState = 0;
+int buttonDownState = 0;
+int lastButtonDownState = 0; 
+int slideSwitchState = 0;
+  
+void setup() { 
+  Serial.begin(9600); 
+  pinMode(A, OUTPUT);
+  pinMode(B, OUTPUT);
+  pinMode(C, OUTPUT);
+  pinMode(D, OUTPUT);
+  pinMode(E, OUTPUT);
+  pinMode(F, OUTPUT);
+  pinMode(G, OUTPUT);
+  pinMode(UNIDAD, OUTPUT);
+  pinMode(DECENA, OUTPUT);
+  pinMode(slideSwitch, INPUT);
+  pinMode(ADELANTE, OUTPUT);
+  pinMode(ATRAS, OUTPUT);
+}
+
+void loop() {
+  if (digitalRead(slideSwitch)){
+    digitalWrite(ATRAS, LOW);
+  	digitalWrite(ADELANTE, HIGH);
+    counter, counter2 = initiateCounter();
+  	showNumbers(counter, counter2);
+  }
+  else{
+    digitalWrite(ADELANTE, LOW);
+    digitalWrite(ATRAS, HIGH);
+    counter, counter2 = initiatePrimeNumbers();
+    showNumbers(counter, counter2);
+  }
+}
+int initiatePrimeNumbers(void){
+   tmp = map(analogRead(TMP),0,1023,-50,450);
+    if(tmp == -41){
+      counter = 2;
+      counter2 = 0;
+    }
+    if(tmp == 124){
+      counter = 9;
+      counter2 = 9;
+    }
+    if(tmp == lastTmp){
+      counter = counter;
+      counter2 = counter2;
+    }
+  	lastTmp = tmp;
+    return counter, counter2;
+}
+int initiateCounter(void){
+  buttonUpState = digitalRead(plusOne); 
+  buttonDownState = digitalRead(minusOne);
+  if (buttonUpState != lastButtonUpState) {
+    if (buttonUpState == HIGH) {
+      if(counter < 9){
+        counter++;    
+      }
+      if(counter == 9 & counter2 != 9) {
+        counter = 0;
+        counter2++;
+      }
+      printOnSerial(counter, counter2);
+      delay(200); 
+   	}  
+  }
+  if (buttonDownState != lastButtonDownState) {
+    if (buttonDownState == HIGH) {
+      if(counter == 0 && counter2 >= 1) {
+        counter = 9; 
+        counter2--;
+      }
+      if (counter <= 0 && counter2 == 0){
+        counter = 0;
+        counter2 = 0;
+      }
+      else{
+        counter--;
+      }
+      printOnSerial(counter, counter2);
+      delay(200); 
+    }
+  }
+  return counter, counter2;
+}
+void changeNumber(int buttonPress) {
+  switch (buttonPress) {
+    case 0: 
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(F, LOW);
+    digitalWrite(G, HIGH);
+    break;
+    case 1: 
+    digitalWrite(A, HIGH);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+    break; 
+    case 2:
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, LOW);
+    break; 
+    case 3:
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, LOW);
+    break; 
+    case 4:
+    digitalWrite(A, HIGH);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    break; 
+    case 5: 
+    digitalWrite(A, LOW);
+    digitalWrite(B, HIGH);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    break; 
+    case 6: 
+    digitalWrite(A, LOW);
+    digitalWrite(B, HIGH);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    break; 
+    case 7:
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+    break; 
+    case 8: 
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    break; 
+    case 9: 
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    break;
+  } 
+}
+
+void showNumbers(int unidad, int decena){
+  if (decena == 0){
+    digitalWrite(UNIDAD, HIGH);
+    changeNumber(unidad);
+    delay(25);
+    digitalWrite(UNIDAD, LOW);
+  }
+  else{
+	digitalWrite(UNIDAD, HIGH);
+    changeNumber(unidad);
+    delay(25);
+    digitalWrite(UNIDAD, LOW);
+    digitalWrite(DECENA, HIGH);
+    changeNumber(decena);
+    delay(25);
+    digitalWrite(DECENA, LOW);
+  }
+}
+
+void printOnSerial(int unidad, int decena){
+  Serial.print(decena);
+  Serial.print(unidad);
+  Serial.println("");
+}
+  
